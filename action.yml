@@ -73,26 +73,8 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: "18.x"
-        cache: ${{ inputs.use_node_cache == 'true' && 'npm' || '' }}
-
-    - name: Install Bun
-      uses: oven-sh/setup-bun@v2
-      with:
-        bun-version: 1.2.11
-
-    - name: Install Dependencies
-      shell: bash
-      run: |
-        cd ${{ github.action_path }}
-        bun install
-
-    - name: Install Claude Code
-      shell: bash
-      run: npm install -g @anthropic-ai/claude-code@^1.0.2
+    # Modified for self-hosted runner: Skip Node.js/Bun/Claude Code setup
+    # All dependencies are pre-installed on the self-hosted runner
 
     - name: Run Claude Code Action
       shell: bash
